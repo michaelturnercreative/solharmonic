@@ -1,0 +1,60 @@
+/* ============================================================
+   SolHarmonic — design tokens
+   Brand Book 1.0 (solar) + Lunar theme extension
+   ============================================================ */
+:root{
+  /* --- solar palette --- */
+  --gold:#F6A623;          /* fill only on light grounds — never small text */
+  --amber-text:#8F5A00;    /* text-safe gold: 5.6:1 on Cloud */
+  --midnight:#111111;
+  --cloud:#FAFAF8;
+  --stone:#ECE9E2;
+  --forest:#5D6B5B;        /* artwork only */
+  --ocean:#6D8FA8;         /* artwork, and the hinge into the lunar palette */
+
+  /* --- lunar palette --- */
+  --nocturne:#0E1522;
+  --slate-night:#17202E;
+  --deep-ocean:#2E4A63;
+  --lunar-silver:#A8BDD4;
+  --moon:#D9E4F0;
+  --moonlight:#E8EDF4;
+
+  /* --- semantic (solar is default) --- */
+  --bg:var(--cloud);
+  --panel:#FFFFFF;
+  --sunk:#F2F0EA;
+  --ink:var(--midnight);
+  --ink-2:#5A5A56;
+  --ink-3:#6E6E68;         /* 5.0:1 on Cloud */
+  --line:#E3E0D8;
+  --line-2:#EDEAE2;
+  --accent-text:var(--amber-text);
+
+  /* --- type --- */
+  --tight:"Inter Tight","Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+
+  /* --- structure --- */
+  --maxw:1200px;
+  --gutter:clamp(20px,5vw,64px);
+  --sec-y:clamp(56px,8vw,104px);
+  --r-btn:6px;
+  --r-card:10px;
+  --r-panel:12px;
+  --shadow-hover:0 18px 40px -30px rgba(17,17,17,.4);
+}
+
+/* --- lunar override: class="lunar" on <html> --- */
+:root.lunar{
+  --bg:var(--nocturne);
+  --panel:var(--slate-night);
+  --sunk:#121B29;
+  --ink:var(--moonlight);
+  --ink-2:#9FB2C6;
+  --ink-3:#748CA4;
+  --line:rgba(168,189,212,.16);
+  --line-2:rgba(168,189,212,.10);
+  --accent-text:var(--gold);   /* ~9:1 on Nocturne — safe as text at night */
+}

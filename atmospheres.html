@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>(function(){var t=null;try{t=localStorage.getItem("sh-theme")}catch(e){}var h=new Date().getHours();if(t==="lunar"||(!t&&(h>=19||h<6)))document.documentElement.classList.add("lunar")})()</script>
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/site.css">
+<title>SolHarmonic — Atmospheres</title>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="wordmark" href="index.html">S<span class="o"></span>lHarmonic</a>
+    <button class="nav-toggle" type="button" data-nav-toggle aria-controls="site-menu" aria-expanded="false" aria-label="Open menu"><span></span><span></span></button>
+    <div class="nav-links" id="site-menu">
+      <a href="atmospheres.html" data-page="atmospheres" aria-current="page">Music</a>
+      <a href="licensing.html" data-page="licensing">Licensing</a>
+      <a href="pricing.html" data-page="pricing">Pricing</a>
+      <a href="player.html" data-page="player">Player</a>
+      <button class="theme-btn" data-theme-toggle aria-label="Switch theme"><span data-icon="moon"></span></button>
+      <a href="pricing.html" class="btn btn-gold">Start free trial</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="rule-gold"></div>
+    <p class="label">The library</p>
+    <h1>Eight atmospheres.<br>More every month.</h1>
+    <p class="lede" style="margin-top:20px">Every title is one continuous composition between
+    three and ten hours long. Pick one, set the mix for the room, and leave it.</p>
+  </div>
+</header>
+
+<section class="section-line">
+  <div class="wrap">
+    <div class="grid-4" id="atmos-grid" data-blurb="1"></div>
+  </div>
+</section>
+
+<section class="section-line">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label">Player modes</p>
+      <h2>The same title, four ways.</h2>
+      <p>Modes change how an atmosphere behaves rather than what it is &mdash; density, movement,
+      and how present it sits in the room.</p>
+    </div>
+    <div class="grid-4" id="mode-cards"></div>
+  </div>
+</section>
+
+<div class="trust"><div class="trust-in" id="trust"></div></div>
+
+<footer class="site-foot">
+  <div class="wrap foot-in">
+    <a class="wordmark" href="index.html">S<span class="o"></span>lHarmonic</a>
+    <div class="foot-links">
+      <a href="atmospheres.html">Music</a>
+      <a href="licensing.html">Licensing</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="player.html">Player</a>
+    </div>
+    <p>solharmonic.com · Original compositions, owned and licensed by us</p>
+  </div>
+</footer>
+
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/artwork.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/theme.js"></script>
+<script src="assets/js/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>(function(){var t=null;try{t=localStorage.getItem("sh-theme")}catch(e){}var h=new Date().getHours();if(t==="lunar"||(!t&&(h>=19||h<6)))document.documentElement.classList.add("lunar")})()</script>
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/player.css">
+<title>SolHarmonic — Player</title>
+</head>
+<body class="app-body">
+
+<div class="app">
+
+  <!-- ============ rail : icons only, labels on hover ============ -->
+  <aside class="rail">
+    <a class="wordmark" href="index.html" aria-label="SolHarmonic">S<span class="o"></span><span class="wm-rest">lHarmonic</span></a>
+
+    <div class="navgroup">
+      <p class="gl">Play</p>
+      <button class="navitem" aria-current="true" data-tip="Now playing"><span data-icon="play"></span><span class="lbl">Now playing</span><span class="marker"></span></button>
+      <a class="navitem" href="atmospheres.html" data-tip="Atmospheres"><span data-icon="waves"></span><span class="lbl">Atmospheres</span><span class="marker"></span></a>
+      <button class="navitem" data-tip="Collections"><span data-icon="mix"></span><span class="lbl">Collections</span><span class="marker"></span></button>
+      <button class="navitem" data-tip="Favourites"><span data-icon="heart"></span><span class="lbl">Favourites</span><span class="marker"></span></button>
+      <button class="navitem" data-tip="Recently played"><span data-icon="clock"></span><span class="lbl">Recently played</span><span class="marker"></span></button>
+    </div>
+
+    <div class="navgroup">
+      <p class="gl">Practice</p>
+      <a class="navitem" href="licensing.html" data-tip="Licence"><span data-icon="licence"></span><span class="lbl">Licence</span><span class="marker"></span></a>
+      <button class="navitem" data-tip="Zones &amp; devices"><span data-icon="screen"></span><span class="lbl">Zones &amp; devices</span><span class="marker"></span></button>
+      <button class="navitem" data-tip="Account"><span data-icon="practice"></span><span class="lbl">Account</span><span class="marker"></span></button>
+    </div>
+
+    <div class="foot">
+      <button class="navitem" data-theme-toggle data-tip="Lunar theme"><span data-icon="moon"></span><span class="lbl">Lunar theme</span></button>
+      <div class="licence-chip"><i></i><span class="lbl">Licence active · 8 zones</span></div>
+    </div>
+  </aside>
+
+  <!-- ============ centre ============ -->
+  <main class="stage">
+    <div class="stack">
+      <p class="eyebrow" id="eyebrow">Now playing · Waiting room</p>
+
+      <div class="cover"><canvas id="cover"></canvas></div>
+
+      <div class="titles">
+        <h1 id="title">Forest Stillness</h1>
+        <p class="sub"><b id="duration">Loading audio…</b> · continuous composition</p>
+      </div>
+
+      <div class="progress">
+        <span class="time" id="elapsed">0:00</span>
+        <div class="track" id="track"><div class="fill" id="fill"></div><div class="knob" id="knob"></div></div>
+        <span class="time" id="total">0:00</span>
+      </div>
+
+      <div class="transport">
+        <button class="sq" id="prev" aria-label="Previous"></button>
+        <button class="sq primary" id="play" aria-label="Play"></button>
+        <button class="sq" id="next" aria-label="Next"></button>
+      </div>
+
+      <div class="utils">
+        <button class="sq sm" id="fav" aria-pressed="false" aria-label="Favourite"></button>
+        <button class="sq sm" id="mix-toggle" aria-expanded="false" aria-controls="mixpanel"
+                aria-label="Track mix"></button>
+        <button class="sq sm" id="share" aria-label="Share"></button>
+        <button class="sq sm" id="download" aria-label="Download"></button>
+        <button class="sq sm" id="expand" aria-label="Ceiling view"></button>
+      </div>
+
+      <!-- one line instead of six sliders, until you ask for them -->
+      <button class="layer-summary" id="layer-summary" aria-controls="mixpanel">
+        <span class="ls-dots" id="ls-dots"></span>
+        <span class="ls-text" id="ls-text">Main only</span>
+        <span class="ls-cta">Edit mix</span>
+      </button>
+    </div>
+  </main>
+
+  <!-- ============ mix : a drawer, not a column ============ -->
+  <div class="scrim" id="scrim" hidden></div>
+
+  <aside class="mixpanel" id="mixpanel" aria-hidden="true">
+    <div class="mp-head">
+      <div>
+        <p class="panel-label">Track mix</p>
+        <h2 id="mix-title">Loading track…</h2>
+      </div>
+      <button class="sq sm" id="mix-close" aria-label="Close mix"></button>
+    </div>
+
+    <div class="sliders" id="layer-sliders">
+      <div class="slider"><label for="main-level">Main <span id="main-levelV">100%</span></label>
+        <input id="main-level" data-layer="main" type="range" min="0" max="100" value="100"></div>
+      <div class="slider"><label for="nature-level">Nature <span id="nature-levelV">Not added</span></label>
+        <input id="nature-level" data-layer="nature" type="range" min="0" max="100" value="70"></div>
+      <div class="slider"><label for="emotion-level">Emotion <span id="emotion-levelV">Not added</span></label>
+        <input id="emotion-level" data-layer="emotion" type="range" min="0" max="100" value="70"></div>
+      <div class="slider"><label for="support-level">Support <span id="support-levelV">Not added</span></label>
+        <input id="support-level" data-layer="support" type="range" min="0" max="100" value="70"></div>
+      <div class="slider"><label for="body-level">Body <span id="body-levelV">Not added</span></label>
+        <input id="body-level" data-layer="body" type="range" min="0" max="100" value="70"></div>
+      <div class="slider"><label for="mind-level">Mind <span id="mind-levelV">Not added</span></label>
+        <input id="mind-level" data-layer="mind" type="range" min="0" max="100" value="70"></div>
+    </div>
+
+    <div class="divider"></div>
+    <p class="panel-label">Player mode</p>
+    <div class="modes-4" id="modes"></div>
+
+    <div class="divider"></div>
+    <button class="savebtn">Save as zone preset</button>
+    <div class="zone"><span>Zone</span><span class="chip">Waiting room</span></div>
+    <div class="zone"><span>Schedule</span><span class="chip">Open → close</span></div>
+  </aside>
+
+  <!-- ============ bottom bar : status, not a second transport ============ -->
+  <div class="bar">
+    <div class="nowmini">
+      <div class="thumb"><canvas id="thumb"></canvas></div>
+      <div style="min-width:0">
+        <div class="t" id="mini-title">Forest Stillness</div>
+        <div class="s" id="mini-sub">Waiting room · 8 hr</div>
+      </div>
+    </div>
+    <div class="barmid">
+      <button class="sq sm" id="prev-mini" aria-label="Previous"></button>
+      <button class="sq sm" id="play-mini" aria-label="Play"></button>
+      <button class="sq sm" id="next-mini" aria-label="Next"></button>
+    </div>
+    <div class="barright">
+      <div class="vol">
+        <button class="icon-btn" id="vol-icon" aria-label="Volume"></button>
+        <input id="volume" type="range" min="0" max="100" value="58">
+      </div>
+      <button class="sq sm" id="cast" aria-label="Devices"></button>
+    </div>
+  </div>
+</div>
+
+<button class="ceiling-exit" id="ceiling-exit">Exit ceiling view · Esc</button>
+
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/artwork.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/tracks.js"></script>
+<script src="assets/js/theme.js"></script>
+<script src="assets/js/audio.js"></script>
+<script src="assets/js/player.js"></script>
+
+<script>
+/* ------------------------------------------------------------------
+   Shell behaviour only. Deliberately standalone so player.js stays the
+   single owner of audio, artwork and layer state — nothing here touches
+   either. Safe to delete if you move this into player.js later.
+   ------------------------------------------------------------------ */
+(function () {
+  "use strict";
+  var panel   = document.getElementById("mixpanel"),
+      scrim   = document.getElementById("scrim"),
+      openBtn = document.getElementById("mix-toggle"),
+      summary = document.getElementById("layer-summary"),
+      closeBtn= document.getElementById("mix-close"),
+      lsText  = document.getElementById("ls-text"),
+      lsDots  = document.getElementById("ls-dots");
+
+  /* icons: reuse the set already loaded by icons.js */
+  function setIcon(el, name) {
+    if (el && window.SH && SH.icon) el.innerHTML = SH.icon(name);
+  }
+  setIcon(openBtn, "mix");
+  setIcon(closeBtn, "next");            /* rotated to a chevron by CSS */
+
+  function open(state) {
+    panel.classList.toggle("open", state);
+    panel.setAttribute("aria-hidden", String(!state));
+    openBtn.setAttribute("aria-expanded", String(state));
+    scrim.hidden = !state;
+    document.body.classList.toggle("mix-open", state);
+  }
+  openBtn.addEventListener("click", function () { open(!panel.classList.contains("open")); });
+  summary.addEventListener("click", function () { open(true); });
+  closeBtn.addEventListener("click", function () { open(false); });
+  scrim.addEventListener("click", function () { open(false); });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && panel.classList.contains("open")) open(false);
+  });
+
+  /* ---- the one-line summary of what's in the mix ---- */
+  var LAYERS = ["main", "nature", "emotion", "support", "body", "mind"];
+  var NAMES  = { main:"Main", nature:"Nature", emotion:"Emotion",
+                 support:"Support", body:"Body", mind:"Mind" };
+
+  function refresh() {
+    var on = [], dots = "";
+    LAYERS.forEach(function (k) {
+      var input = document.querySelector('[data-layer="' + k + '"]');
+      var badge = document.getElementById(k + "-levelV");
+      if (!input) return;
+      /* player.js writes "Not added" into the value span for absent stems */
+      var absent = badge && /not added/i.test(badge.textContent);
+      var active = !absent && +input.value > 0;
+      input.closest(".slider").classList.toggle("is-absent", !!absent);
+      input.closest(".slider").classList.toggle("is-off", !absent && +input.value === 0);
+      if (active) on.push(NAMES[k]);
+      dots += '<i class="' + (active ? "on" : absent ? "absent" : "off") + '"></i>';
+    });
+    lsDots.innerHTML = dots;
+    lsText.textContent = on.length === 0 ? "Muted"
+                       : on.length === 1 ? on[0] + " only"
+                       : on.length + " layers · " + on.slice(0, 3).join(", ") +
+                         (on.length > 3 ? "…" : "");
+  }
+
+  document.getElementById("layer-sliders").addEventListener("input", refresh);
+  /* player.js relabels the spans when a track loads; poll briefly, then settle */
+  var ticks = 0, poll = setInterval(function () {
+    refresh(); if (++ticks > 40) clearInterval(poll);
+  }, 250);
+  refresh();
+})();
+</script>
+</body>
+</html>

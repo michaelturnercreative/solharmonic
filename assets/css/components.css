@@ -1,0 +1,132 @@
+/* ============================================================
+   SolHarmonic — shared components
+   ============================================================ */
+
+/* ---------- wordmark ---------- */
+.wordmark{
+  font-family:var(--tight);font-weight:500;letter-spacing:-.03em;
+  display:inline-flex;align-items:baseline;line-height:1;white-space:nowrap;color:var(--ink);
+}
+.wordmark .o{
+  display:inline-block;background:var(--gold);border-radius:50%;
+  width:.63em;height:.63em;margin:0 .015em;transform:translateY(-.008em);
+}
+html.lunar .wordmark .o{background:var(--moon)}
+
+/* ---------- buttons ---------- */
+.btn{
+  font-family:var(--tight);font-weight:500;font-size:14.5px;letter-spacing:-.005em;
+  padding:11px 20px;border-radius:var(--r-btn);display:inline-block;
+  transition:background .2s,color .2s,border-color .2s;
+}
+.btn-gold{background:var(--gold);color:#241802}
+.btn-gold:hover{background:#FFB43C}
+.btn-line{border:1px solid var(--line);color:var(--ink)}
+.btn-line:hover{border-color:var(--ink)}
+.btn-dark{background:var(--midnight);color:#F4F4F1}
+html.lunar .btn-dark{background:var(--moon);color:#0E1522}
+.btn-lg{padding:14px 26px;font-size:16px;border-radius:7px}
+
+/* ---------- square icon buttons (the icon-sheet cell, made interactive) ---------- */
+.sq{
+  width:52px;height:52px;border:1px solid var(--line);border-radius:var(--r-card);
+  background:var(--panel);display:inline-flex;align-items:center;justify-content:center;
+  transition:border-color .22s ease,background .22s ease,transform .18s ease;
+}
+.sq svg{width:22px;height:22px}
+.sq:hover{border-color:var(--ink);transform:translateY(-1px)}
+.sq[aria-pressed="true"]{background:var(--sunk);border-color:var(--ink)}
+.sq.primary{width:66px;height:66px;background:var(--gold);border-color:var(--gold);color:#241802}
+.sq.primary svg{width:26px;height:26px}
+.sq.primary:hover{background:#FFB43C;border-color:#FFB43C}
+.sq.sm{width:42px;height:42px;border-radius:8px}
+.sq.sm svg{width:18px;height:18px}
+
+/* ---------- site nav ---------- */
+.nav{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:24px;height:70px;
+  max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter)}
+.nav .wordmark{font-size:23px}
+.nav-links{display:flex;align-items:center;gap:30px;font-size:14.5px;color:var(--ink-2)}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a[aria-current="page"]{color:var(--ink)}
+.nav-toggle{display:none;width:42px;height:42px;border:1px solid var(--line);border-radius:8px;
+  align-items:center;justify-content:center;flex-direction:column;gap:5px}
+.nav-toggle span{display:block;width:18px;height:1.5px;background:currentColor;border-radius:2px;
+  transition:transform .2s ease,opacity .2s ease}
+.nav-toggle[aria-expanded="true"] span:first-child{transform:translateY(3.25px) rotate(45deg)}
+.nav-toggle[aria-expanded="true"] span:last-child{transform:translateY(-3.25px) rotate(-45deg)}
+.theme-btn{width:36px;height:36px;border:1px solid var(--line);border-radius:8px;
+  display:inline-flex;align-items:center;justify-content:center;transition:border-color .2s}
+.theme-btn svg{width:17px;height:17px}
+.theme-btn:hover{border-color:var(--ink)}
+
+/* ---------- trust bar ---------- */
+.trust{background:var(--midnight);color:#EDEDEA}
+html.lunar .trust{background:#080D16}
+.trust-in{display:grid;grid-template-columns:repeat(5,1fr);gap:22px;
+  padding:26px var(--gutter);max-width:var(--maxw);margin:0 auto}
+.trust div{display:flex;gap:11px;align-items:flex-start}
+.trust .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex:none;margin-top:7px}
+.trust b{font-family:var(--tight);font-weight:500;font-size:13.5px;display:block;letter-spacing:-.005em}
+.trust span{font-size:12.5px;color:#9A9A94;display:block}
+
+/* ---------- cards ---------- */
+.card{border-radius:var(--r-card);overflow:hidden;background:var(--panel);
+  border:1px solid var(--line);transition:transform .28s ease,box-shadow .28s ease}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover)}
+.card .thumb{aspect-ratio:4/3;position:relative;background:var(--sunk)}
+.card .thumb canvas{width:100%;height:100%;display:block}
+.card .meta{padding:14px 16px 16px}
+.card h3{font-size:16.5px}
+.card .dur{font-family:var(--tight);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-3);margin-top:4px}
+
+/* ---------- mode tiles ---------- */
+.mode-tile{aspect-ratio:1;border:1px solid var(--line);border-radius:var(--r-card);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;
+  background:var(--panel);transition:border-color .22s,background .22s}
+.mode-tile svg{width:21px;height:21px}
+.mode-tile span{font-family:var(--tight);font-size:11px;font-weight:500;letter-spacing:.02em;
+  color:var(--ink-3)}
+.mode-tile:hover{border-color:var(--ink)}
+.mode-tile[aria-pressed="true"]{background:var(--sunk);border-color:var(--ink)}
+.mode-tile[aria-pressed="true"] span{color:var(--ink)}
+
+/* ---------- sliders ---------- */
+input[type=range]{width:100%;accent-color:var(--gold);height:20px}
+html.lunar input[type=range]{accent-color:var(--moon)}
+.slider label{display:flex;justify-content:space-between;gap:10px;
+  font-family:var(--tight);font-weight:500;font-size:13.5px;margin-bottom:5px}
+.slider label span{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);font-weight:400}
+
+/* ---------- footer ---------- */
+.site-foot{background:var(--midnight);color:#8A8A84;padding:0 0 48px}
+html.lunar .site-foot{background:#080D16}
+.foot-in{border-top:1px solid #262622;padding-top:30px;display:flex;flex-wrap:wrap;
+  gap:18px 40px;justify-content:space-between;align-items:center}
+.site-foot .wordmark{font-size:19px;color:#F4F4F1}
+.site-foot p{font-size:12.5px;color:#77776F;margin:0}
+.foot-links{display:flex;gap:22px;font-size:13px;color:#8A8A84}
+.foot-links a:hover{color:#F4F4F1}
+
+@media(max-width:980px){
+  .trust-in{grid-template-columns:repeat(2,1fr)}
+  .nav-in{position:relative}
+  .nav-toggle{display:inline-flex}
+  .nav-links{position:absolute;top:calc(100% + 1px);left:var(--gutter);right:var(--gutter);
+    display:none;align-items:stretch;gap:0;padding:12px;background:var(--panel);
+    border:1px solid var(--line);border-radius:0 0 var(--r-panel) var(--r-panel);
+    box-shadow:0 22px 42px -28px rgba(0,0,0,.45)}
+  .nav-links.is-open{display:flex}
+  .nav-links>a:not(.btn){padding:12px 10px;font-family:var(--tight);font-size:17px;color:var(--ink)}
+  .nav-links>a[aria-current="page"]{background:var(--sunk);border-radius:7px}
+  .nav-links .theme-btn{position:absolute;right:12px;bottom:12px}
+  .nav-links .btn{margin-top:10px;margin-right:48px;text-align:center}
+}
+@media(max-width:560px){
+  .nav-in{height:62px}
+  .nav .wordmark{font-size:21px}
+  .nav-links{left:0;right:0;border-left:0;border-right:0;border-radius:0;padding:12px var(--gutter) 16px}
+}

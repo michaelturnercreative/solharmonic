@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>(function(){var t=null;try{t=localStorage.getItem("sh-theme")}catch(e){}var h=new Date().getHours();if(t==="lunar"||(!t&&(h>=19||h<6)))document.documentElement.classList.add("lunar")})()</script>
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/site.css">
+<title>SolHarmonic — Sound that shapes atmosphere</title>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="wordmark" href="index.html">S<span class="o"></span>lHarmonic</a>
+    <button class="nav-toggle" type="button" data-nav-toggle aria-controls="site-menu" aria-expanded="false" aria-label="Open menu"><span></span><span></span></button>
+    <div class="nav-links" id="site-menu">
+      <a href="atmospheres.html" data-page="atmospheres">Music</a>
+      <a href="licensing.html" data-page="licensing">Licensing</a>
+      <a href="pricing.html" data-page="pricing">Pricing</a>
+      <a href="player.html" data-page="player">Player</a>
+      <button class="theme-btn" data-theme-toggle aria-label="Switch theme"><span data-icon="moon"></span></button>
+      <a href="pricing.html" class="btn btn-gold">Start free trial</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="rule-gold"></div>
+      <h1>Sound that shapes atmosphere.</h1>
+      <p class="lede">Long-form atmospheric music for professional spaces. Three to ten hours a
+      track, composed to sit under a room rather than compete with it &mdash; and licensed for
+      commercial use, so you can play it open to close.</p>
+      <div class="cta-row">
+        <a href="pricing.html" class="btn btn-gold btn-lg">Start free trial</a>
+        <a href="player.html" class="btn btn-line btn-lg">Open the player</a>
+      </div>
+      <p class="cta-note">14 days. No card. Commercial licence included from day one.</p>
+    </div>
+    <div class="art"><canvas id="hero-art"></canvas></div>
+  </div>
+</header>
+
+<div class="trust"><div class="trust-in" id="trust"></div></div>
+
+<section class="section-line">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label">The library</p>
+      <h2>Atmospheres, not playlists.</h2>
+      <p>Each one is a single continuous composition, not a queue of tracks stitched together.
+      Nothing restarts, nothing announces itself, and no one in the room notices the seam &mdash;
+      because there isn't one.</p>
+    </div>
+    <div class="grid-4" id="atmos-grid" data-limit="4"></div>
+    <p class="note"><a href="atmospheres.html" style="color:var(--accent-text)">See the whole
+    library &rarr;</a></p>
+  </div>
+</section>
+
+<section class="section-line">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label">Player modes</p>
+      <h2>One library, tuned to the room it's in.</h2>
+    </div>
+    <div class="grid-4" id="mode-cards"></div>
+  </div>
+</section>
+
+<section class="section-line">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label">Atmosphere mix</p>
+      <h2>Four dials, and the room changes.</h2>
+      <p>Every atmosphere ships with the same four controls. Set them once for a space and they
+      stay put &mdash; no one at the front desk has to think about it again.</p>
+    </div>
+    <div class="mix">
+      <div class="mix-art"><canvas id="mix-art"></canvas></div>
+      <div class="mix-panel">
+        <div class="t">Forest Stillness &middot; 8 hour atmosphere</div>
+        <div class="slider"><label for="depth">Depth <span id="depthV">Deep</span></label>
+          <input id="depth" type="range" min="0" max="100" value="72"></div>
+        <div class="slider"><label for="warmth">Warmth <span id="warmthV">Warm</span></label>
+          <input id="warmth" type="range" min="0" max="100" value="58"></div>
+        <div class="slider"><label for="texture">Texture <span id="textureV">Textured</span></label>
+          <input id="texture" type="range" min="0" max="100" value="64"></div>
+        <div class="slider"><label for="bright">Brightness <span id="brightV">Low</span></label>
+          <input id="bright" type="range" min="0" max="100" value="34"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="commercial section-line">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label">Licensing</p>
+      <h2>The part your streaming account can't do.</h2>
+      <p>Playing a personal music account where customers can hear it is a public performance.
+      It's why businesses get invoices from rights societies they've never dealt with.
+      SolHarmonic is built the other way around.</p>
+    </div>
+    <div class="grid-3">
+      <div class="clause"><div class="n">Included</div><h3>Commercial performance rights</h3>
+        <p>Every composition and recording is original work we own outright. Your subscription
+        covers playing it publicly throughout your space.</p></div>
+      <div class="clause"><div class="n">On file</div><h3>A certificate per location</h3>
+        <p>Each licensed address gets a dated certificate in your dashboard. Download it and hand
+        it to anyone who asks.</p></div>
+      <div class="clause"><div class="n">Covered</div><h3>We handle the claim</h3>
+        <p>If a music-rights claim is brought over content played through SolHarmonic, we take it
+        on and cover the defence.</p></div>
+    </div>
+    <p class="note">Sample language for layout. Final terms to be drafted with counsel before
+    launch. <a href="licensing.html" style="color:var(--accent-text)">Read the full terms &rarr;</a></p>
+  </div>
+</section>
+
+<section class="section-line">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label">Built for every device</p>
+      <h2>Set it up on whatever's already in the room.</h2>
+    </div>
+    <div class="devices" id="devices"></div>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="wrap">
+    <h2>Put it on in one room and listen to the difference.</h2>
+    <p class="lede">Fourteen days, no card, licence active from the first minute.</p>
+    <div class="cta-row">
+      <a href="pricing.html" class="btn btn-gold btn-lg">Start free trial</a>
+      <a href="player.html" class="btn btn-line btn-lg">Open the player</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-foot">
+  <div class="wrap foot-in">
+    <a class="wordmark" href="index.html">S<span class="o"></span>lHarmonic</a>
+    <div class="foot-links">
+      <a href="atmospheres.html">Music</a>
+      <a href="licensing.html">Licensing</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="player.html">Player</a>
+    </div>
+    <p>solharmonic.com · Original compositions, owned and licensed by us</p>
+  </div>
+</footer>
+
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/artwork.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/theme.js"></script>
+<script src="assets/js/site.js"></script>
+</body>
+</html>
