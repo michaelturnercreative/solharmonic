@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/components.css">
+<link rel="stylesheet" href="../assets/css/player.css">
+<link rel="stylesheet" href="persistent.css">
+<title>SolHarmonic — Member app</title>
+</head>
+<body class="persistent-body">
+<div class="persistent-app">
+  <aside class="rail" aria-label="Member navigation">
+    <a class="wordmark" href="#player" aria-label="SolHarmonic player">S<span class="o"></span><span class="wm-rest">lHarmonic</span></a>
+    <div class="navgroup">
+      <button class="navitem" data-view-target="player" data-tip="Now playing" aria-current="true"><span data-icon="play"></span><span class="lbl">Now playing</span></button>
+      <button class="navitem" data-view-target="library" data-tip="Library"><span data-icon="waves"></span><span class="lbl">Library</span></button>
+      <button class="navitem" data-view-target="favorites" data-tip="Favorites"><span data-icon="heart"></span><span class="lbl">Favorites</span></button>
+    </div>
+    <div class="navgroup">
+      <button class="navitem" data-view-target="zones" data-tip="Rooms &amp; zones"><span data-icon="screen"></span><span class="lbl">Rooms &amp; zones</span></button>
+      <button class="navitem" data-view-target="account" data-tip="Licence &amp; account"><span data-icon="practice"></span><span class="lbl">Licence &amp; account</span></button>
+    </div>
+    <div class="foot">
+      <button class="navitem" data-theme-toggle data-tip="Lunar theme"><span data-icon="moon"></span><span class="lbl">Lunar theme</span></button>
+      <div class="licence-chip" title="Licence active"><i></i><span class="lbl">Licence active</span></div>
+    </div>
+  </aside>
+
+  <main class="workspace">
+    <section class="app-view player-view is-active" data-view="player" aria-labelledby="now-title">
+      <div class="player-stack">
+        <p class="eyebrow">Now playing · Waiting room</p>
+        <div class="full-cover"><canvas id="full-cover"></canvas></div>
+        <div class="full-titles">
+          <h1 id="now-title">Loading…</h1>
+          <p><span id="track-kind">Continuous composition</span> · commercial licence active</p>
+        </div>
+        <div class="full-progress">
+          <span id="full-elapsed">0:00</span>
+          <button class="progress-rail" id="full-seek" aria-label="Seek through track"><i id="full-progress-fill"></i></button>
+          <span id="full-total">0:00</span>
+        </div>
+        <div class="full-transport">
+          <button class="sq" id="full-prev" aria-label="Previous track"></button>
+          <button class="sq primary" id="full-play" aria-label="Play"></button>
+          <button class="sq" id="full-next" aria-label="Next track"></button>
+        </div>
+        <div class="full-utils">
+          <button class="sq sm favorite-toggle" id="full-favorite" aria-label="Add to favorites" aria-pressed="false"></button>
+          <button class="sq sm" id="full-mix" aria-label="Track mix" aria-expanded="false" aria-controls="quick-mix"></button>
+          <button class="sq sm" id="full-share" aria-label="Share atmosphere"></button>
+          <button class="sq sm download-toggle" id="full-download" aria-label="Download for offline listening" aria-pressed="false"></button>
+          <button class="sq sm" id="full-expand" aria-label="Enter fullscreen player"></button>
+        </div>
+        <p class="utility-status" id="utility-status" aria-live="polite"></p>
+        <div class="quick-mix" id="quick-mix" hidden>
+          <span>Room mode</span><button class="is-active">Waiting</button><button>Spa</button><button>Focus</button><button>Sleep</button>
+        </div>
+        <input id="full-volume" type="range" min="0" max="100" value="58" aria-label="Volume" hidden>
+      </div>
+    </section>
+
+    <section class="app-view" data-view="library" aria-labelledby="library-title">
+      <header class="view-head"><div><p class="label">Member library</p><h1 id="library-title">Choose the room’s atmosphere.</h1><p>Each composition is one passage through the day. The sun or moon crosses the active atmosphere, then carries into the next.</p></div></header>
+      <div class="track-grid" id="library-grid"></div>
+    </section>
+
+    <section class="app-view" data-view="favorites" aria-labelledby="favorites-title">
+      <header class="view-head"><div><p class="label">Favorites</p><h1 id="favorites-title">The atmospheres you return to.</h1><p>Saved for quick access in every room and zone.</p></div></header>
+      <div class="track-grid" id="favorites-grid"></div>
+      <div class="empty-state" id="favorites-empty"><span data-icon="heart"></span><h2>No favorites yet.</h2><p>Use the heart on the player or in the library to keep an atmosphere here.</p><button class="btn btn-gold" data-view-target="library">Explore the library</button></div>
+    </section>
+
+    <section class="app-view" data-view="zones" aria-labelledby="zones-title">
+      <header class="view-head view-head-row"><div><p class="label">Rooms &amp; zones</p><h1 id="zones-title">Your practice, at a glance.</h1><p>Each zone remembers its atmosphere, volume, and daily schedule.</p></div><button class="btn btn-gold">Add a zone</button></header>
+      <div class="zone-list">
+        <article class="zone-row"><div><h3>Waiting room</h3><p><span data-current-title>Current atmosphere</span> · Open → close</p></div><span class="status active">Playing now</span></article>
+        <article class="zone-row"><div><h3>Treatment room 1</h3><p>Deep Meditation · 8:00 AM → 6:00 PM</p></div><span class="status active">Playing now</span></article>
+        <article class="zone-row"><div><h3>Treatment room 2</h3><p>Ocean Drift · 8:00 AM → 6:00 PM</p></div><span class="status">Paused</span></article>
+        <article class="zone-row"><div><h3>Recovery room</h3><p>Evening Calm · Manual start</p></div><span class="status">Offline</span></article>
+      </div>
+    </section>
+
+    <section class="app-view" data-view="account" aria-labelledby="account-title">
+      <header class="view-head view-head-row"><div><p class="label">Licence &amp; account</p><h1 id="account-title">Sonoran Wellness.</h1><p>Membership, location coverage, billing, and account access.</p></div><a class="btn btn-line" href="../index.html">Visit public site</a></header>
+      <div class="account-grid">
+        <article class="account-panel account-wide"><p class="label">Commercial licence</p><h2>Active and covered.</h2><p>Your licence covers public playback at this location, including all active rooms and zones.</p><div class="account-lines"><div><span>Licensed location</span><b>123 Desert View Rd · Phoenix, AZ</b></div><div><span>Certificate</span><b>SH-2026-0812</b></div><div><span>Coverage</span><b>Up to 8 zones</b></div><div><span>Renews</span><b>September 12, 2026</b></div></div><button class="btn btn-gold">Download certificate</button></article>
+        <article class="account-panel"><p class="label">Plan</p><h2>Practice</h2><p>$99 monthly · 4 of 8 zones active</p><button class="btn btn-line">Manage plan</button></article>
+        <article class="account-panel"><p class="label">Account</p><h2>Michael</h2><p>Owner · michael@example.com</p><a class="btn btn-line" href="../index.html">Log out</a></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="persistent-player" aria-label="Persistent audio player">
+    <button class="mini-now" data-view-target="player" aria-label="Open full player">
+      <span class="mini-art"><canvas id="mini-cover"></canvas></span>
+      <span><b id="mini-title">Loading…</b><small id="mini-status">Waiting room · ready</small></span>
+    </button>
+    <div class="mini-controls">
+      <button class="mini-icon" id="mini-prev" aria-label="Previous track"></button>
+      <button class="mini-icon mini-play" id="mini-play" aria-label="Play"></button>
+      <button class="mini-icon" id="mini-next" aria-label="Next track"></button>
+    </div>
+    <div class="mini-actions">
+      <button class="mini-icon favorite-toggle" id="mini-favorite" aria-label="Add to favorites" aria-pressed="false"></button>
+      <label><span data-icon="volume"></span><input id="mini-volume" type="range" min="0" max="100" value="58" aria-label="Volume"></label>
+    </div>
+    <div class="mini-progress"><i id="mini-progress-fill"></i></div>
+  </footer>
+</div>
+
+<script>window.SH_ASSET_ROOT="../";</script>
+<script src="../assets/js/icons.js"></script>
+<script src="../assets/js/artwork.js"></script>
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/tracks.js"></script>
+<script src="../assets/js/theme.js"></script>
+<script src="persistent.js"></script>
+</body>
+</html>

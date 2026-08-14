@@ -48,7 +48,7 @@
      ground optically thin out, so the night set is drawn one step heavier. */
   function weight(explicit) {
     if (explicit) return explicit;
-    return document.documentElement.classList.contains("lunar") ? 1.55 : 1.4;
+    return document.body && document.body.classList.contains("lunar") ? 1.55 : 1.4;
   }
 
   function icon(name, w) {

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <script>(function(){var t=null;try{t=localStorage.getItem("sh-theme")}catch(e){}var h=new Date().getHours();if(t==="lunar"||(!t&&(h>=19||h<6)))document.documentElement.classList.add("lunar")})()</script>
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,24 +18,22 @@
 
 <div class="app">
 
-  <!-- ============ rail : icons only, labels on hover ============ -->
+  <!-- ====== rail : icon nav (desktop left, mobile bottom) ====== -->
   <aside class="rail">
-    <a class="wordmark" href="index.html" aria-label="SolHarmonic">S<span class="o"></span><span class="wm-rest">lHarmonic</span></a>
+    <a class="wordmark" href="app/index.html" aria-label="SolHarmonic app home">S<span class="o"></span><span class="wm-rest">lHarmonic</span></a>
 
     <div class="navgroup">
       <p class="gl">Play</p>
-      <button class="navitem" aria-current="true" data-tip="Now playing"><span data-icon="play"></span><span class="lbl">Now playing</span><span class="marker"></span></button>
-      <a class="navitem" href="atmospheres.html" data-tip="Atmospheres"><span data-icon="waves"></span><span class="lbl">Atmospheres</span><span class="marker"></span></a>
-      <button class="navitem" data-tip="Collections"><span data-icon="mix"></span><span class="lbl">Collections</span><span class="marker"></span></button>
-      <button class="navitem" data-tip="Favourites"><span data-icon="heart"></span><span class="lbl">Favourites</span><span class="marker"></span></button>
-      <button class="navitem" data-tip="Recently played"><span data-icon="clock"></span><span class="lbl">Recently played</span><span class="marker"></span></button>
+      <button class="navitem" aria-current="true" data-tip="Now playing"><span data-icon="play"></span><span class="lbl">Now playing</span></button>
+      <a class="navitem" href="app/library.html" data-tip="Library"><span data-icon="waves"></span><span class="lbl">Library</span></a>
+      <button class="navitem" data-tip="Favourites"><span data-icon="heart"></span><span class="lbl">Favourites</span></button>
+      <button class="navitem" data-tip="Recently played"><span data-icon="clock"></span><span class="lbl">Recently played</span></button>
     </div>
 
     <div class="navgroup">
       <p class="gl">Practice</p>
-      <a class="navitem" href="licensing.html" data-tip="Licence"><span data-icon="licence"></span><span class="lbl">Licence</span><span class="marker"></span></a>
-      <button class="navitem" data-tip="Zones &amp; devices"><span data-icon="screen"></span><span class="lbl">Zones &amp; devices</span><span class="marker"></span></button>
-      <button class="navitem" data-tip="Account"><span data-icon="practice"></span><span class="lbl">Account</span><span class="marker"></span></button>
+      <a class="navitem" href="app/zones.html" data-tip="Rooms &amp; zones"><span data-icon="screen"></span><span class="lbl">Rooms &amp; zones</span></a>
+      <a class="navitem" href="app/account.html" data-tip="Licence &amp; account"><span data-icon="practice"></span><span class="lbl">Licence &amp; account</span></a>
     </div>
 
     <div class="foot">
@@ -44,7 +42,7 @@
     </div>
   </aside>
 
-  <!-- ============ centre ============ -->
+  <!-- ====== centre ====== -->
   <main class="stage">
     <div class="stack">
       <p class="eyebrow" id="eyebrow">Now playing · Waiting room</p>
@@ -70,14 +68,13 @@
 
       <div class="utils">
         <button class="sq sm" id="fav" aria-pressed="false" aria-label="Favourite"></button>
-        <button class="sq sm" id="mix-toggle" aria-expanded="false" aria-controls="mixpanel"
-                aria-label="Track mix"></button>
+        <button class="sq sm" id="mix-toggle" aria-expanded="false" aria-controls="mixpanel" aria-label="Track mix"></button>
         <button class="sq sm" id="share" aria-label="Share"></button>
         <button class="sq sm" id="download" aria-label="Download"></button>
         <button class="sq sm" id="expand" aria-label="Ceiling view"></button>
       </div>
 
-      <!-- one line instead of six sliders, until you ask for them -->
+      <!-- one line instead of six sliders, until asked for -->
       <button class="layer-summary" id="layer-summary" aria-controls="mixpanel">
         <span class="ls-dots" id="ls-dots"></span>
         <span class="ls-text" id="ls-text">Main only</span>
@@ -86,10 +83,10 @@
     </div>
   </main>
 
-  <!-- ============ mix : a drawer, not a column ============ -->
+  <!-- ====== mix : drawer on desktop, bottom sheet on mobile ====== -->
   <div class="scrim" id="scrim" hidden></div>
 
-  <aside class="mixpanel" id="mixpanel" aria-hidden="true">
+  <aside class="mixpanel" id="mixpanel" aria-hidden="true" role="dialog" aria-label="Track mix">
     <div class="mp-head">
       <div>
         <p class="panel-label">Track mix</p>
@@ -123,7 +120,7 @@
     <div class="zone"><span>Schedule</span><span class="chip">Open → close</span></div>
   </aside>
 
-  <!-- ============ bottom bar : status, not a second transport ============ -->
+  <!-- ====== bottom bar : desktop status strip (hidden on mobile) ====== -->
   <div class="bar">
     <div class="nowmini">
       <div class="thumb"><canvas id="thumb"></canvas></div>
@@ -159,73 +156,120 @@
 
 <script>
 /* ------------------------------------------------------------------
-   Shell behaviour only. Deliberately standalone so player.js stays the
-   single owner of audio, artwork and layer state — nothing here touches
-   either. Safe to delete if you move this into player.js later.
+   Shell chrome only — the mix drawer and its one-line summary.
+   Deliberately standalone: player.js remains the single owner of audio,
+   artwork and layer state. Nothing below touches either.
    ------------------------------------------------------------------ */
 (function () {
   "use strict";
-  var panel   = document.getElementById("mixpanel"),
-      scrim   = document.getElementById("scrim"),
-      openBtn = document.getElementById("mix-toggle"),
-      summary = document.getElementById("layer-summary"),
-      closeBtn= document.getElementById("mix-close"),
-      lsText  = document.getElementById("ls-text"),
-      lsDots  = document.getElementById("ls-dots");
 
-  /* icons: reuse the set already loaded by icons.js */
+  var panel    = document.getElementById("mixpanel"),
+      scrim    = document.getElementById("scrim"),
+      openBtn  = document.getElementById("mix-toggle"),
+      summary  = document.getElementById("layer-summary"),
+      closeBtn = document.getElementById("mix-close"),
+      sliders  = document.getElementById("layer-sliders"),
+      lsText   = document.getElementById("ls-text"),
+      lsDots   = document.getElementById("ls-dots");
+
+  if (!panel || !sliders) return;
+
+  /* icons come from icons.js, which has already run */
   function setIcon(el, name) {
     if (el && window.SH && SH.icon) el.innerHTML = SH.icon(name);
   }
   setIcon(openBtn, "mix");
-  setIcon(closeBtn, "next");            /* rotated to a chevron by CSS */
+  setIcon(closeBtn, "next");
 
-  function open(state) {
+  /* ---------------- open / close ---------------- */
+  var lastFocus = null;
+
+  function setOpen(state) {
     panel.classList.toggle("open", state);
     panel.setAttribute("aria-hidden", String(!state));
-    openBtn.setAttribute("aria-expanded", String(state));
+    if (openBtn) openBtn.setAttribute("aria-expanded", String(state));
     scrim.hidden = !state;
     document.body.classList.toggle("mix-open", state);
+
+    if (state) {
+      lastFocus = document.activeElement;
+      if (closeBtn) closeBtn.focus();
+    } else if (lastFocus && lastFocus.focus) {
+      lastFocus.focus();
+    }
   }
-  openBtn.addEventListener("click", function () { open(!panel.classList.contains("open")); });
-  summary.addEventListener("click", function () { open(true); });
-  closeBtn.addEventListener("click", function () { open(false); });
-  scrim.addEventListener("click", function () { open(false); });
+
+  if (openBtn)  openBtn.addEventListener("click", function () {
+    setOpen(!panel.classList.contains("open"));
+  });
+  if (summary)  summary.addEventListener("click", function () { setOpen(true); });
+  if (closeBtn) closeBtn.addEventListener("click", function () { setOpen(false); });
+  scrim.addEventListener("click", function () { setOpen(false); });
+
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && panel.classList.contains("open")) open(false);
+    if (e.key === "Escape" && panel.classList.contains("open")) {
+      e.stopPropagation();          /* don't also fire the ceiling-view exit */
+      setOpen(false);
+    }
   });
 
-  /* ---- the one-line summary of what's in the mix ---- */
+  /* swipe the bottom sheet down to dismiss (mobile) */
+  var startY = null;
+  panel.addEventListener("touchstart", function (e) {
+    if (panel.scrollTop <= 0) startY = e.touches[0].clientY;
+  }, { passive: true });
+  panel.addEventListener("touchmove", function (e) {
+    if (startY === null) return;
+    var dy = e.touches[0].clientY - startY;
+    if (dy > 70) { setOpen(false); startY = null; }
+  }, { passive: true });
+  panel.addEventListener("touchend", function () { startY = null; });
+
+  /* ---------------- the one-line summary ---------------- */
   var LAYERS = ["main", "nature", "emotion", "support", "body", "mind"];
-  var NAMES  = { main:"Main", nature:"Nature", emotion:"Emotion",
-                 support:"Support", body:"Body", mind:"Mind" };
+  var NAMES  = { main: "Main", nature: "Nature", emotion: "Emotion",
+                 support: "Support", body: "Body", mind: "Mind" };
 
   function refresh() {
     var on = [], dots = "";
-    LAYERS.forEach(function (k) {
-      var input = document.querySelector('[data-layer="' + k + '"]');
-      var badge = document.getElementById(k + "-levelV");
+
+    LAYERS.forEach(function (key) {
+      var input = sliders.querySelector('[data-layer="' + key + '"]');
       if (!input) return;
-      /* player.js writes "Not added" into the value span for absent stems */
-      var absent = badge && /not added/i.test(badge.textContent);
-      var active = !absent && +input.value > 0;
-      input.closest(".slider").classList.toggle("is-absent", !!absent);
-      input.closest(".slider").classList.toggle("is-off", !absent && +input.value === 0);
-      if (active) on.push(NAMES[k]);
+      var row   = input.closest(".slider");
+      var badge = document.getElementById(key + "-levelV");
+
+      /* player.js writes "Not added" (or similar) for stems this track lacks.
+         Also treat a disabled input as absent, in case that changes. */
+      var absent = input.disabled ||
+                   (badge && /not\s*added|unavailable|—/i.test(badge.textContent));
+      var active = !absent && Number(input.value) > 0;
+
+      if (row) {
+        row.classList.toggle("is-absent", !!absent);
+        row.classList.toggle("is-off", !absent && Number(input.value) === 0);
+      }
+      if (active) on.push(NAMES[key]);
       dots += '<i class="' + (active ? "on" : absent ? "absent" : "off") + '"></i>';
     });
+
     lsDots.innerHTML = dots;
-    lsText.textContent = on.length === 0 ? "Muted"
-                       : on.length === 1 ? on[0] + " only"
-                       : on.length + " layers · " + on.slice(0, 3).join(", ") +
-                         (on.length > 3 ? "…" : "");
+    lsText.textContent =
+      on.length === 0 ? "Muted" :
+      on.length === 1 ? on[0] + " only" :
+      on.length + " layers · " + on.slice(0, 3).join(", ") + (on.length > 3 ? "…" : "");
   }
 
-  document.getElementById("layer-sliders").addEventListener("input", refresh);
-  /* player.js relabels the spans when a track loads; poll briefly, then settle */
-  var ticks = 0, poll = setInterval(function () {
-    refresh(); if (++ticks > 40) clearInterval(poll);
-  }, 250);
+  sliders.addEventListener("input", refresh);
+
+  /* player.js relabels the value spans when a track loads.
+     A MutationObserver catches that without polling. */
+  if (window.MutationObserver) {
+    new MutationObserver(refresh).observe(sliders, {
+      subtree: true, childList: true, characterData: true,
+      attributes: true, attributeFilter: ["disabled", "value"]
+    });
+  }
   refresh();
 })();
 </script>

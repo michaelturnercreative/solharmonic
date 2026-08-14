@@ -22,7 +22,7 @@
   };
 
   function theme() {
-    return document.documentElement.classList.contains("lunar") ? THEMES.lunar : THEMES.solar;
+    return document.body.classList.contains("lunar") ? THEMES.lunar : THEMES.solar;
   }
   function mixHex(a, b, t) {
     var c = a.map(function (v, i) { return Math.round(v + (b[i] - v) * t); });

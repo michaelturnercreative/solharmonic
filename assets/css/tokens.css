@@ -46,8 +46,8 @@
   --shadow-hover:0 18px 40px -30px rgba(17,17,17,.4);
 }
 
-/* --- lunar override: class="lunar" on <html> --- */
-:root.lunar{
+/* --- lunar override: class="lunar" on <body> --- */
+body.lunar{
   --bg:var(--nocturne);
   --panel:var(--slate-night);
   --sunk:#121B29;

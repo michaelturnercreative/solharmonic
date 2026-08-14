@@ -16,7 +16,7 @@ opening the files directly doesn't trip the browser's module CORS rules.
 `file://`, which is only used to remember your theme choice:
 
 ```bash
-cd "solharmonic-site"
+cd "SolHarmonic Site"
 python3 -m http.server 8080
 # then open http://localhost:8080
 ```
@@ -26,10 +26,6 @@ Live Server extension.
 
 **Deploy it** by uploading the folder as-is to Netlify, Vercel, GitHub Pages,
 S3, or any static host. There is nothing to compile.
-
-For GitHub Pages, upload the contents of this folder to the repository root,
-then select **Deploy from a branch** under **Settings → Pages** and choose the
-branch containing the site with `/ (root)` as the source folder.
 
 ---
 
@@ -41,7 +37,23 @@ branch containing the site with `/ (root)` as the source folder.
 | `atmospheres.html` | The full library, with blurbs |
 | `licensing.html` | Six licence clauses in the buyer's language |
 | `pricing.html` | Three tiers |
-| `player.html` | The player application — compact rail, centered playback, mix drawer, status bar, ceiling view |
+| `preview.html` | Public sample player for visitors |
+| `login.html` / `signup.html` | Public-to-member access points (concept flow; authentication is not connected yet) |
+| `app-persistent/index.html` | Primary member app — continuous player, library, favorites, zones, and account |
+| `app/index.html` | Earlier multi-page member-player concept retained for comparison |
+| `app/library.html` | Full member atmosphere library |
+| `app/zones.html` | Member rooms, schedules, and playback status |
+| `app/account.html` | Member licence, plan, billing, and account |
+
+### Public site and member app
+
+The public site explains and sells SolHarmonic. It contains the home page, public library preview,
+licensing, pricing, and a short sample. Members enter through `login.html` and then stay inside the
+`app-persistent/` experience. Its player remains mounted while members move among the library,
+favorites, zones, and account views, so playback continues without a page reload.
+
+`player.html` and `app/` are retained as earlier concepts, but new member flows use
+`app-persistent/index.html`.
 
 ---
 
@@ -81,7 +93,7 @@ exported image. It is resolution-independent and weighs nothing.
 Brightness feed the artwork and the audio engine from the same values, so the
 picture and the tone are the same fact drawn two ways.
 
-**Two themes, one system.** Add `class="lunar"` to `<html>` and every token
+**Two themes, one system.** Add `class="lunar"` to `<body>` and every token
 swaps. Solar Gold stays for the primary call to action in both — it's the
 thread that ties them to one brand.
 

@@ -17,7 +17,7 @@
   }
 
   function apply(lunar) {
-    document.documentElement.classList.toggle("lunar", !!lunar);
+    document.body.classList.toggle("lunar", !!lunar);
     document.querySelectorAll("[data-theme-toggle]").forEach(function (b) {
       var ico = b.querySelector("[data-icon]") || b;
       if (ico.setAttribute) ico.setAttribute("data-icon", lunar ? "sun" : "moon");
@@ -37,7 +37,7 @@
 
     document.querySelectorAll("[data-theme-toggle]").forEach(function (b) {
       b.addEventListener("click", function () {
-        var next = !document.documentElement.classList.contains("lunar");
+        var next = !document.body.classList.contains("lunar");
         apply(next);
         try { localStorage.setItem(KEY, next ? "lunar" : "solar"); } catch (e) {}
       });

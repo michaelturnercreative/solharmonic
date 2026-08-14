@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>(function(){var t=null;try{t=localStorage.getItem("sh-theme")}catch(e){}var h=new Date().getHours();if(t==="lunar"||(!t&&(h>=19||h<6)))document.documentElement.classList.add("lunar")})()</script>
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/tokens.css"><link rel="stylesheet" href="../assets/css/base.css"><link rel="stylesheet" href="../assets/css/components.css"><link rel="stylesheet" href="../assets/css/player.css">
+<title>Now playing — SolHarmonic</title>
+</head>
+<body class="app-body"><div class="app">
+<aside class="rail">
+  <a class="wordmark" href="index.html" aria-label="SolHarmonic app home">S<span class="o"></span><span class="wm-rest">lHarmonic</span></a>
+  <div class="navgroup"><p class="gl">Play</p><a class="navitem" href="index.html" aria-current="true" data-tip="Now playing"><span data-icon="play"></span><span class="lbl">Now playing</span></a><a class="navitem" href="library.html" data-tip="Library"><span data-icon="waves"></span><span class="lbl">Library</span></a><button class="navitem" data-tip="Favourites"><span data-icon="heart"></span><span class="lbl">Favourites</span></button><button class="navitem" data-tip="Recently played"><span data-icon="clock"></span><span class="lbl">Recently played</span></button></div>
+  <div class="navgroup"><p class="gl">Practice</p><a class="navitem" href="zones.html" data-tip="Rooms &amp; zones"><span data-icon="screen"></span><span class="lbl">Rooms &amp; zones</span></a><a class="navitem" href="account.html" data-tip="Licence &amp; account"><span data-icon="practice"></span><span class="lbl">Licence &amp; account</span></a></div>
+  <div class="foot"><button class="navitem" data-theme-toggle data-tip="Lunar theme"><span data-icon="moon"></span><span class="lbl">Lunar theme</span></button><div class="licence-chip"><i></i><span class="lbl">Licence active · 8 zones</span></div></div>
+</aside>
+<main class="stage"><div class="stack">
+  <p class="eyebrow" id="eyebrow">Now playing · Waiting room</p><div class="cover"><canvas id="cover"></canvas></div>
+  <div class="titles"><h1 id="title">Forest Stillness</h1><p class="sub"><b id="duration">Loading audio…</b> · continuous composition</p></div>
+  <div class="progress"><span class="time" id="elapsed">0:00</span><div class="track" id="track"><div class="fill" id="fill"></div><div class="knob" id="knob"></div></div><span class="time" id="total">0:00</span></div>
+  <div class="transport"><button class="sq" id="prev" aria-label="Previous"></button><button class="sq primary" id="play" aria-label="Play"></button><button class="sq" id="next" aria-label="Next"></button></div>
+  <div class="utils"><button class="sq sm" id="fav" aria-pressed="false" aria-label="Favourite"></button><button class="sq sm" id="mix-toggle" aria-expanded="false" aria-controls="mixpanel" aria-label="Track mix"></button><button class="sq sm" id="share" aria-label="Share"></button><button class="sq sm" id="download" aria-label="Download"></button><button class="sq sm" id="expand" aria-label="Ceiling view"></button></div>
+  <button class="layer-summary" id="layer-summary" aria-controls="mixpanel"><span class="ls-dots" id="ls-dots"></span><span class="ls-text" id="ls-text">Main only</span><span class="ls-cta">Edit mix</span></button>
+</div></main>
+<div class="scrim" id="scrim" hidden></div><aside class="mixpanel" id="mixpanel" aria-hidden="true" role="dialog" aria-label="Track mix">
+  <div class="mp-head"><div><p class="panel-label">Track mix</p><h2 id="mix-title">Loading track…</h2></div><button class="sq sm" id="mix-close" aria-label="Close mix"></button></div>
+  <div class="sliders" id="layer-sliders">
+    <div class="slider"><label for="main-level">Main <span id="main-levelV">100%</span></label><input id="main-level" data-layer="main" type="range" min="0" max="100" value="100"></div>
+    <div class="slider"><label for="nature-level">Nature <span id="nature-levelV">Not added</span></label><input id="nature-level" data-layer="nature" type="range" min="0" max="100" value="70"></div>
+    <div class="slider"><label for="emotion-level">Emotion <span id="emotion-levelV">Not added</span></label><input id="emotion-level" data-layer="emotion" type="range" min="0" max="100" value="70"></div>
+    <div class="slider"><label for="support-level">Support <span id="support-levelV">Not added</span></label><input id="support-level" data-layer="support" type="range" min="0" max="100" value="70"></div>
+    <div class="slider"><label for="body-level">Body <span id="body-levelV">Not added</span></label><input id="body-level" data-layer="body" type="range" min="0" max="100" value="70"></div>
+    <div class="slider"><label for="mind-level">Mind <span id="mind-levelV">Not added</span></label><input id="mind-level" data-layer="mind" type="range" min="0" max="100" value="70"></div>
+  </div><div class="divider"></div><p class="panel-label">Player mode</p><div class="modes-4" id="modes"></div><div class="divider"></div><button class="savebtn">Save as zone preset</button><div class="zone"><span>Zone</span><span class="chip">Waiting room</span></div><div class="zone"><span>Schedule</span><span class="chip">Open → close</span></div>
+</aside>
+<div class="bar"><div class="nowmini"><div class="thumb"><canvas id="thumb"></canvas></div><div style="min-width:0"><div class="t" id="mini-title">Forest Stillness</div><div class="s" id="mini-sub">Waiting room · 8 hr</div></div></div><div class="barmid"><button class="sq sm" id="prev-mini" aria-label="Previous"></button><button class="sq sm" id="play-mini" aria-label="Play"></button><button class="sq sm" id="next-mini" aria-label="Next"></button></div><div class="barright"><div class="vol"><button class="icon-btn" id="vol-icon" aria-label="Volume"></button><input id="volume" type="range" min="0" max="100" value="58"></div><button class="sq sm" id="cast" aria-label="Devices"></button></div></div>
+</div><button class="ceiling-exit" id="ceiling-exit">Exit ceiling view · Esc</button>
+<script>window.SH_ASSET_ROOT="../";</script><script src="../assets/js/icons.js"></script><script src="../assets/js/artwork.js"></script><script src="../assets/js/data.js"></script><script src="../assets/js/tracks.js"></script><script src="../assets/js/theme.js"></script><script src="../assets/js/audio.js"></script><script src="../assets/js/player.js"></script><script src="../assets/js/player-shell.js"></script>
+</body></html>

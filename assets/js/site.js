@@ -15,36 +15,6 @@
   function boot() {
     SH.mountIcons();
 
-    /* --- tablet / mobile navigation --- */
-    var nav = document.querySelector(".nav");
-    var navToggle = document.querySelector("[data-nav-toggle]");
-    var navLinks = document.getElementById("site-menu");
-    if (nav && navToggle && navLinks) {
-      function setMenu(open) {
-        navLinks.classList.toggle("is-open", open);
-        navToggle.setAttribute("aria-expanded", String(open));
-        navToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-      }
-      navToggle.addEventListener("click", function () {
-        setMenu(navToggle.getAttribute("aria-expanded") !== "true");
-      });
-      navLinks.addEventListener("click", function (event) {
-        if (event.target.closest("a")) setMenu(false);
-      });
-      document.addEventListener("click", function (event) {
-        if (!nav.contains(event.target)) setMenu(false);
-      });
-      document.addEventListener("keydown", function (event) {
-        if (event.key === "Escape" && navToggle.getAttribute("aria-expanded") === "true") {
-          setMenu(false);
-          navToggle.focus();
-        }
-      });
-      window.addEventListener("resize", function () {
-        if (window.innerWidth > 980) setMenu(false);
-      });
-    }
-
     /* --- hero artwork --- */
     var heroCv = document.getElementById("hero-art");
     var hero = null;
@@ -71,7 +41,7 @@
       list.forEach(function (a, i) {
         var el = document.createElement("a");
         el.className = "card";
-        el.href = "player.html#" + a.id;
+        el.href = "preview.html#" + a.id;
         el.innerHTML =
           '<div class="thumb"><canvas></canvas></div>' +
           '<div class="meta"><h3>' + a.name + "</h3>" +
