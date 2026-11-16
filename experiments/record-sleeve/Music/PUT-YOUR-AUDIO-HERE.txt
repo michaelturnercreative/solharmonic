@@ -1,0 +1,4 @@
+Put your MP3, WAV, M4A or other browser-supported audio files here.
+Open index.html, click Open music folder, and select this Music folder.
+Select the folder again after adding files or reopening the player.
+The browser reads your files locally; it does not upload them.
