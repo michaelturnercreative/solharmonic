@@ -29,6 +29,13 @@ S3, or any static host. There is nothing to compile.
 
 ---
 
+## Record sleeve version
+
+The separate [Record sleeve player](experiments/record-sleeve/README.md) lives in
+`experiments/record-sleeve/`. This is the focus of ongoing Record sleeve design work.
+It is self-contained, uses local audio, and includes static scenic backgrounds.
+Open its `index.html` or run `python3 experiments/record-sleeve/start.py`.
+
 ## Pages
 
 | File | What it is |
