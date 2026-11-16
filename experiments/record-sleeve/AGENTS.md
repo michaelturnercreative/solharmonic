@@ -7,3 +7,8 @@ Preserve the static scenic backgrounds, refined gold/Ocean logo, Cinzel Regular,
 and the user's chosen Record sleeve layout. Do not restore discarded design variants.
 Audio is local-only; do not describe folder selection as cloud storage or persistence.
 Do not commit personal audio files. Run the checks documented in README.md for changes.
+
+## Local development preference
+The user wants development in a local desktop project, with GitHub for code history.
+Do not introduce a dependency on ChatGPT, Sites hosting or cloud audio storage.
+Read DESKTOP-HANDOFF.md for the handoff context. Keep personal music out of commits.

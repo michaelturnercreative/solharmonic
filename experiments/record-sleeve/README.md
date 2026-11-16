@@ -56,3 +56,8 @@ python3 -c "import ast; ast.parse(open('start.py').read())"
 
 Then check Classic/Scenic, Solar/Lunar, mobile sizing, local audio playback, queue,
 seeking, volume, loop and sleep timer in a browser. There is no generated build output.
+
+## Desktop handoff
+
+See [DESKTOP-HANDOFF.md](DESKTOP-HANDOFF.md) for cloning this branch, opening a
+local desktop project, preserving ownership, and backing up code and music.
